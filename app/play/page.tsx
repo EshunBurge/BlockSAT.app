@@ -38,9 +38,8 @@ export default function PlayPage() {
     questionsAnswered,
     questionsCorrect,
     popups,
-    activeUnlockPieceId,
+    awaitingReward,
     initGame,
-    requestUnlock,
     resolveQuestion,
     placePiece,
     dismissPopup,
@@ -186,15 +185,15 @@ export default function PlayPage() {
     setDrag({ pieceId, x: e.clientX, y: e.clientY, shape: piece.shape, color: piece.color });
   };
 
-  const handleLockedClick = (pieceId: string) => {
-    requestUnlock(pieceId);
-  };
-
   const handleQuestionResolved = (result: { correct: boolean; leveledUp: boolean; newLevel: number }) => {
     resolveQuestion(result.correct);
     setQuestionCount((n) => n + 1);
-    if (result.correct) play("correct");
-    else play("incorrect");
+    if (result.correct) {
+      play("correct");
+      toast.success("Correct! Here are your 3 pieces.", { duration: 1800 });
+    } else {
+      play("incorrect");
+    }
     if (result.leveledUp) {
       play("levelUp");
       toast.success(`Level up! You're now level ${result.newLevel}`, { duration: 2500 });
@@ -235,7 +234,13 @@ export default function PlayPage() {
           <FloatingScorePopups popups={popups} onDone={dismissPopup} />
         </div>
 
-        <PieceTray pieces={pieces} draggingPieceId={drag?.pieceId ?? null} onLockedClick={handleLockedClick} onDragStart={handleDragStart} />
+        <PieceTray pieces={pieces} draggingPieceId={drag?.pieceId ?? null} onDragStart={handleDragStart} />
+
+        {!awaitingReward && (
+          <p className="text-center text-xs text-white/40">
+            Place all 3 pieces to earn another question and 3 more.
+          </p>
+        )}
       </div>
 
       {drag && (
@@ -244,7 +249,7 @@ export default function PlayPage() {
 
       <QuestionModal
         key={questionCount}
-        open={!!activeUnlockPieceId}
+        open={awaitingReward && !gameOver}
         practiceFocus={profile.practiceFocus}
         difficulty={profile.difficulty}
         questionNumber={questionCount + 1}

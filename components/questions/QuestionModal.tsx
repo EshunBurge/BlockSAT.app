@@ -158,7 +158,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
                     onClick={() => onResolved(result)}
                     className="mt-4 w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90"
                   >
-                    {result.correct ? "Unlock piece & continue" : "Try another question"}
+                    {result.correct ? "Get my 3 pieces" : "Try another question"}
                   </Button>
                 </motion.div>
               )}

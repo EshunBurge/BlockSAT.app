@@ -132,15 +132,110 @@
 /* ---------------------------------------------------------------------- */
 /* BlockSAT brand utilities — premium-game aesthetic (vibrant gradients,   */
 /* glassmorphism, soft glow) layered on top of the neutral shadcn tokens.  */
+/*                                                                        */
+/* Color scheme / "board theme": the background gradients + glow colors   */
+/* below are driven by CSS variables so a `data-theme="<slug>"` attribute */
+/* (set on the AppShell wrapper from the player's saved profile) swaps    */
+/* the whole app's palette instantly. "classic" is the default (:root).   */
 /* ---------------------------------------------------------------------- */
+:root {
+  --scheme-hero-1: #ff9a5a33;
+  --scheme-hero-2: #8b5cf655;
+  --scheme-bg-a: #1b0f2e;
+  --scheme-bg-b: #2a1445;
+  --scheme-bg-c: #4a1d5c;
+  --scheme-bg-d: #7a2a52;
+  --scheme-app-a: #1e1033;
+  --scheme-app-b: #2c1650;
+  --scheme-app-c: #3a1a4a;
+  --scheme-glow: rgba(255, 180, 120, 0.5);
+  --scheme-glow-shadow: rgba(249, 115, 22, 0.5);
+  --scheme-accent: #fb923c;
+}
+
+[data-theme="midnight"] {
+  --scheme-hero-1: #3b82f633;
+  --scheme-hero-2: #1e40af55;
+  --scheme-bg-a: #05070f;
+  --scheme-bg-b: #0b1220;
+  --scheme-bg-c: #101d3a;
+  --scheme-bg-d: #16264a;
+  --scheme-app-a: #060a16;
+  --scheme-app-b: #0c1526;
+  --scheme-app-c: #101f38;
+  --scheme-glow: rgba(120, 170, 255, 0.5);
+  --scheme-glow-shadow: rgba(59, 130, 246, 0.5);
+  --scheme-accent: #60a5fa;
+}
+
+[data-theme="sunset"] {
+  --scheme-hero-1: #fb718533;
+  --scheme-hero-2: #f9731655;
+  --scheme-bg-a: #2b0f1e;
+  --scheme-bg-b: #4a1530;
+  --scheme-bg-c: #7a2a3a;
+  --scheme-bg-d: #a83a2e;
+  --scheme-app-a: #2a1220;
+  --scheme-app-b: #4a1a2a;
+  --scheme-app-c: #6a2530;
+  --scheme-glow: rgba(255, 150, 130, 0.55);
+  --scheme-glow-shadow: rgba(249, 115, 22, 0.55);
+  --scheme-accent: #fb7185;
+}
+
+[data-theme="forest"] {
+  --scheme-hero-1: #34d39933;
+  --scheme-hero-2: #05966955;
+  --scheme-bg-a: #06170f;
+  --scheme-bg-b: #0b2a1a;
+  --scheme-bg-c: #123d24;
+  --scheme-bg-d: #1c5233;
+  --scheme-app-a: #071a10;
+  --scheme-app-b: #0e2818;
+  --scheme-app-c: #15361f;
+  --scheme-glow: rgba(110, 231, 183, 0.5);
+  --scheme-glow-shadow: rgba(16, 185, 129, 0.5);
+  --scheme-accent: #34d399;
+}
+
+[data-theme="aurora"] {
+  --scheme-hero-1: #22d3ee33;
+  --scheme-hero-2: #a78bfa55;
+  --scheme-bg-a: #0a0f1e;
+  --scheme-bg-b: #10203a;
+  --scheme-bg-c: #163a4a;
+  --scheme-bg-d: #234a6a;
+  --scheme-app-a: #08101e;
+  --scheme-app-b: #0f2032;
+  --scheme-app-c: #163244;
+  --scheme-glow: rgba(103, 232, 249, 0.5);
+  --scheme-glow-shadow: rgba(34, 211, 238, 0.5);
+  --scheme-accent: #22d3ee;
+}
+
+[data-theme="galaxy"] {
+  --scheme-hero-1: #a855f733;
+  --scheme-hero-2: #6366f155;
+  --scheme-bg-a: #0a0616;
+  --scheme-bg-b: #170b33;
+  --scheme-bg-c: #2a1050;
+  --scheme-bg-d: #401a66;
+  --scheme-app-a: #0b0718;
+  --scheme-app-b: #170c2e;
+  --scheme-app-c: #24123f;
+  --scheme-glow: rgba(196, 150, 255, 0.5);
+  --scheme-glow-shadow: rgba(168, 85, 247, 0.5);
+  --scheme-accent: #a855f7;
+}
+
 @layer utilities {
   .bg-blocksat-hero {
-    background: radial-gradient(circle at 20% 20%, #ff9a5a33 0%, transparent 45%),
-      radial-gradient(circle at 80% 0%, #8b5cf655 0%, transparent 50%),
-      linear-gradient(160deg, #1b0f2e 0%, #2a1445 40%, #4a1d5c 75%, #7a2a52 100%);
+    background: radial-gradient(circle at 20% 20%, var(--scheme-hero-1) 0%, transparent 45%),
+      radial-gradient(circle at 80% 0%, var(--scheme-hero-2) 0%, transparent 50%),
+      linear-gradient(160deg, var(--scheme-bg-a) 0%, var(--scheme-bg-b) 40%, var(--scheme-bg-c) 75%, var(--scheme-bg-d) 100%);
   }
   .bg-blocksat-app {
-    background: linear-gradient(160deg, #1e1033 0%, #2c1650 45%, #3a1a4a 100%);
+    background: linear-gradient(160deg, var(--scheme-app-a) 0%, var(--scheme-app-b) 45%, var(--scheme-app-c) 100%);
   }
   .glass-card {
     @apply bg-white/10 backdrop-blur-xl border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.25)];
@@ -149,9 +244,12 @@
     @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)];
   }
   .text-glow {
-    text-shadow: 0 0 20px rgba(255, 180, 120, 0.5);
+    text-shadow: 0 0 20px var(--scheme-glow);
   }
   .btn-glow {
-    box-shadow: 0 8px 24px -4px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 8px 24px -4px var(--scheme-glow-shadow);
+  }
+  .text-scheme-accent {
+    color: var(--scheme-accent);
   }
 }

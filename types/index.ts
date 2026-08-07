@@ -42,7 +42,6 @@ export interface PieceInstance {
   id: string;
   shape: PieceShape;
   color: string;
-  locked: boolean;
 }
 
 export interface ProfileDTO {

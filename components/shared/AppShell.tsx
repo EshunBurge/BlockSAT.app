@@ -42,7 +42,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col bg-blocksat-app text-white">
+    <div data-theme={profile.activeTheme} className="flex min-h-screen flex-1 flex-col bg-blocksat-app text-white">
       <header className="sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
           <Link href="/dashboard"><LogoWordmark className="text-lg" /></Link>

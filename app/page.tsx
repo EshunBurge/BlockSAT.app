@@ -11,8 +11,8 @@ const FEATURES = [
   },
   {
     icon: BookOpen,
-    title: "Every piece starts locked",
-    description: "Answer an SAT-style question correctly to unlock a piece. Get it wrong, see the explanation, and try again. Studying is the progression.",
+    title: "Answer to earn pieces",
+    description: "Answer an SAT-style question correctly to earn a fresh set of 3 pieces. Get it wrong, see the explanation, and try again. Studying is the progression.",
   },
   {
     icon: Sigma,
@@ -60,8 +60,8 @@ export default function LandingPage() {
             Answer questions. Unlock pieces. <span className="bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">Stack your way to a better score.</span>
           </h1>
           <p className="max-w-2xl text-lg text-white/80">
-            BlockSAT turns SAT prep into an addictive puzzle game. Every piece starts locked — correct answers unlock
-            them, letting you clear rows, chain combos, and climb the leaderboard while you study.
+            BlockSAT turns SAT prep into an addictive puzzle game. Answer a question correctly to earn 3 pieces,
+            then clear rows, chain combos, and climb the leaderboard while you study.
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button render={<Link href="/signup" />} size="lg" className="bg-gradient-to-r from-orange-400 to-red-500 text-white btn-glow hover:opacity-90">

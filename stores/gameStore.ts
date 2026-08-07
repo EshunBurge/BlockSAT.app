@@ -12,13 +12,16 @@ import {
 } from "@/lib/game/board";
 import { randomShape, randomColor } from "@/lib/game/pieces";
 
-function makeLockedPiece(): PieceInstance {
+function makePiece(): PieceInstance {
   return {
     id: crypto.randomUUID(),
     shape: randomShape(),
     color: randomColor(),
-    locked: true,
   };
+}
+
+function makePieceSet(): PieceInstance[] {
+  return [makePiece(), makePiece(), makePiece()];
 }
 
 export interface FloatingScorePopup {
@@ -42,25 +45,18 @@ interface GameState {
   longestCorrectStreak: number;
   lastClearedLines: { rows: number[]; cols: number[] } | null;
   popups: FloatingScorePopup[];
-  activeUnlockPieceId: string | null;
+  /** True whenever the player has no pieces left and needs to answer a question to get three more. */
+  awaitingReward: boolean;
 
   initGame: () => void;
-  requestUnlock: (pieceId: string) => void;
-  cancelUnlock: () => void;
   resolveQuestion: (correct: boolean) => void;
   placePiece: (pieceId: string, row: number, col: number) => boolean;
   dismissPopup: (id: string) => void;
 }
 
-function checkGameOver(board: Board, pieces: PieceInstance[]): boolean {
-  const unlockedPlayable = pieces.filter((p) => !p.locked);
-  if (unlockedPlayable.length === 0) return false; // still have locked pieces to unlock
-  return unlockedPlayable.every((p) => !canPlaceAnywhere(board, p.shape));
-}
-
 export const useGameStore = create<GameState>((set, get) => ({
   board: createEmptyBoard(),
-  pieces: [makeLockedPiece(), makeLockedPiece(), makeLockedPiece()],
+  pieces: [],
   score: 0,
   linesCleared: 0,
   comboStreak: 0,
@@ -72,12 +68,12 @@ export const useGameStore = create<GameState>((set, get) => ({
   longestCorrectStreak: 0,
   lastClearedLines: null,
   popups: [],
-  activeUnlockPieceId: null,
+  awaitingReward: true,
 
   initGame: () =>
     set({
       board: createEmptyBoard(),
-      pieces: [makeLockedPiece(), makeLockedPiece(), makeLockedPiece()],
+      pieces: [],
       score: 0,
       linesCleared: 0,
       comboStreak: 0,
@@ -89,44 +85,46 @@ export const useGameStore = create<GameState>((set, get) => ({
       longestCorrectStreak: 0,
       lastClearedLines: null,
       popups: [],
-      activeUnlockPieceId: null,
+      awaitingReward: true,
     }),
 
-  requestUnlock: (pieceId) => set({ activeUnlockPieceId: pieceId }),
-  cancelUnlock: () => set({ activeUnlockPieceId: null }),
-
+  // Answering correctly grants a fresh set of three pieces. Answering
+  // incorrectly leaves the player with none, so the question prompt stays
+  // open (a new question is fetched) until they get one right.
   resolveQuestion: (correct) => {
-    const { activeUnlockPieceId, pieces, correctStreak, longestCorrectStreak } = get();
+    const { correctStreak, longestCorrectStreak, board } = get();
     const questionsAnswered = get().questionsAnswered + 1;
     const questionsCorrect = get().questionsCorrect + (correct ? 1 : 0);
     const nextStreak = correct ? correctStreak + 1 : 0;
 
-    if (!correct || !activeUnlockPieceId) {
+    if (!correct) {
       set({
         questionsAnswered,
         questionsCorrect,
-        correctStreak: nextStreak,
-        longestCorrectStreak: Math.max(longestCorrectStreak, nextStreak),
-        activeUnlockPieceId: correct ? activeUnlockPieceId : null,
+        correctStreak: 0,
+        longestCorrectStreak,
       });
       return;
     }
 
-    const nextPieces = pieces.map((p) => (p.id === activeUnlockPieceId ? { ...p, locked: false } : p));
+    const nextPieces = makePieceSet();
+    const stillPlayable = nextPieces.some((p) => canPlaceAnywhere(board, p.shape));
+
     set({
       pieces: nextPieces,
       questionsAnswered,
       questionsCorrect,
       correctStreak: nextStreak,
       longestCorrectStreak: Math.max(longestCorrectStreak, nextStreak),
-      activeUnlockPieceId: null,
+      awaitingReward: false,
+      gameOver: !stillPlayable,
     });
   },
 
   placePiece: (pieceId, row, col) => {
     const state = get();
     const piece = state.pieces.find((p) => p.id === pieceId);
-    if (!piece || piece.locked) return false;
+    if (!piece) return false;
     if (!canPlace(state.board, piece.shape, row, col)) return false;
 
     const cellsPlaced = piece.shape.flat().filter(Boolean).length;
@@ -140,10 +138,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const clearScore = computeClearScore(clearResult.totalLines, comboStreak);
     const longestCombo = Math.max(state.longestCombo, comboStreak);
 
-    let nextPieces = state.pieces.filter((p) => p.id !== pieceId);
-    nextPieces.push(makeLockedPiece());
-    // Once all 3 slots are used up and refilled, ensure exactly 3 remain.
-    if (nextPieces.length > 3) nextPieces = nextPieces.slice(-3);
+    const nextPieces = state.pieces.filter((p) => p.id !== pieceId);
 
     const popups: FloatingScorePopup[] = [...state.popups];
     if (placementScore > 0) {
@@ -153,7 +148,10 @@ export const useGameStore = create<GameState>((set, get) => ({
       popups.push({ id: crypto.randomUUID(), amount: clearScore, x: 50, y: 35 });
     }
 
-    const gameOver = checkGameOver(board, nextPieces);
+    // Ran out of pieces: time to answer another question for three more,
+    // rather than game over.
+    const awaitingReward = nextPieces.length === 0;
+    const gameOver = !awaitingReward && nextPieces.every((p) => !canPlaceAnywhere(board, p.shape));
 
     set({
       board,
@@ -165,6 +163,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       lastClearedLines:
         clearResult.totalLines > 0 ? { rows: clearResult.rowsCleared, cols: clearResult.colsCleared } : null,
       popups,
+      awaitingReward,
       gameOver,
     });
     return true;
