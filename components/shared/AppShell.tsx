@@ -41,7 +41,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div data-theme={profile.activeTheme} className="flex min-h-screen flex-1 flex-col bg-blocksat-app text-white">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-black/20 pt-safe backdrop-blur-lg">
+      {/* z-[60] keeps the nav above any in-page modal's fixed z-50 backdrop
+          (e.g. the mid-game question dialog, or the game-over dialog), so
+          players can always navigate away without needing to dismiss the
+          modal first — previously the dim overlay silently swallowed clicks
+          on these nav links even though they remained visible through it. */}
+      <header className="sticky top-0 z-[60] border-b border-white/10 bg-black/20 pt-safe backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
           <Link href="/dashboard"><LogoWordmark height={24} /></Link>
 
