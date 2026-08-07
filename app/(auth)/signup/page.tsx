@@ -59,7 +59,7 @@ export default function SignUpPage() {
           We sent a verification link to your inbox. Since this environment doesn&apos;t have a live email provider
           connected, here&apos;s your link directly:
         </p>
-        <Button render={<Link href={devLink} />} className="w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button render={<Link href={devLink} />} className="w-full btn-brand btn-glow hover:opacity-90">
           Verify my email
         </Button>
       </div>
@@ -97,22 +97,22 @@ export default function SignUpPage() {
           />
           <Label htmlFor="agree" className="text-sm font-normal text-white/80">
             I agree to the{" "}
-            <Link href="/legal/terms" className="text-orange-300 hover:underline">Terms of Service</Link> and{" "}
-            <Link href="/legal/privacy" className="text-orange-300 hover:underline">Privacy Policy</Link>
+            <Link href="/legal/terms" className="text-scheme-accent hover:underline">Terms of Service</Link> and{" "}
+            <Link href="/legal/privacy" className="text-scheme-accent hover:underline">Privacy Policy</Link>
           </Label>
         </div>
         {errors.agree && <p className="-mt-2 text-sm text-red-300">{errors.agree.message}</p>}
 
         {signUp.isError && <p className="text-sm text-red-300">{(signUp.error as Error).message}</p>}
 
-        <Button type="submit" disabled={signUp.isPending} className="mt-2 bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button type="submit" disabled={signUp.isPending} className="mt-2 btn-brand btn-glow hover:opacity-90">
           {signUp.isPending ? "Creating account..." : "Create account"}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-white/70">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium text-orange-300 hover:underline">Log in</Link>
+        <Link href="/login" className="font-medium text-scheme-accent hover:underline">Log in</Link>
       </p>
     </div>
   );

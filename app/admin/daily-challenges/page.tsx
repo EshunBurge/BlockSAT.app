@@ -39,7 +39,7 @@ export default function AdminDailyChallengesPage() {
               <p className="text-sm text-white/60">{c.description}</p>
             </div>
             <div className="text-right text-sm">
-              <p className="text-orange-300">+{c.xpReward} XP</p>
+              <p className="text-scheme-accent">+{c.xpReward} XP</p>
               <p className="text-white/50">{c.completions}/{c.participants} completed</p>
             </div>
           </div>

@@ -73,12 +73,12 @@ export default function LeaderboardPage() {
                 {i < 3 ? <Trophy className="h-4 w-4" /> : i + 1}
               </span>
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-gradient-to-br from-orange-400 to-purple-500 text-xs text-white">
+                <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
                   {entry.username.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <span className="flex-1 font-medium">{entry.username}</span>
-              <span className="font-bold text-orange-300">{formatValue(metric, entry.value)}</span>
+              <span className="font-bold text-scheme-accent">{formatValue(metric, entry.value)}</span>
             </div>
           ))}
         </div>

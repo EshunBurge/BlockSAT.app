@@ -26,6 +26,8 @@ export async function ensureProfile(userId: string, email: string) {
   }
 
   return prisma.profile.create({
-    data: { id: userId, email, username, role },
+    // No separate onboarding flow anymore — practice focus/difficulty are
+    // chosen fresh before every game instead of once at signup.
+    data: { id: userId, email, username, role, onboardingDone: true },
   });
 }

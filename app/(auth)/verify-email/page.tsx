@@ -38,7 +38,7 @@ function VerifyEmailContent() {
   if (!token && sent) {
     return (
       <div className="text-center">
-        <MailCheck className="mx-auto mb-4 h-12 w-12 text-orange-300" />
+        <MailCheck className="mx-auto mb-4 h-12 w-12 text-scheme-accent" />
         <h1 className="mb-2 text-2xl font-bold">Verify your email</h1>
         <p className="text-sm text-white/70">
           We&apos;ve sent a verification link to your email address. Click it to activate your account, then come
@@ -53,8 +53,8 @@ function VerifyEmailContent() {
       <div className="text-center">
         <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-green-400" />
         <h1 className="mb-2 text-2xl font-bold">Email verified!</h1>
-        <p className="mb-6 text-sm text-white/70">Your account is ready. Let&apos;s set up your practice preferences.</p>
-        <Button render={<Link href="/onboarding" />} className="w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <p className="mb-6 text-sm text-white/70">Your account is ready to go.</p>
+        <Button render={<Link href="/dashboard" />} className="w-full btn-brand btn-glow hover:opacity-90">
           Continue
         </Button>
       </div>

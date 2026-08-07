@@ -34,7 +34,7 @@ export default function AdminAchievementsPage() {
             <p className="font-semibold">{a.name}</p>
             <p className="mb-2 text-sm text-white/60">{a.description}</p>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-orange-300">+{a.xpReward} XP</span>
+              <span className="text-scheme-accent">+{a.xpReward} XP</span>
               <span className="text-white/50">{a.unlockedCount} unlocked</span>
             </div>
           </div>

@@ -15,7 +15,7 @@ export function FloatingScorePopups({ popups, onDone }: { popups: FloatingScoreP
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             onAnimationComplete={() => onDone(p.id)}
-            className="absolute text-xl font-extrabold text-orange-300 text-glow"
+            className="absolute text-xl font-extrabold text-scheme-accent text-glow"
             style={{ left: `${p.x}%`, top: `${p.y}%` }}
           >
             +{p.amount}

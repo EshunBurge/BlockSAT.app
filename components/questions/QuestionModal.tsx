@@ -120,7 +120,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
                     onClick={() => handleSelect(choice.key)}
                     className={cn(
                       "flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition",
-                      !selected && "border-white/15 bg-white/5 hover:border-orange-300/60 hover:bg-white/10",
+                      !selected && "border-white/15 bg-white/5 hover:border-scheme-accent/60 hover:bg-white/10",
                       selected && !showCorrect && !showIncorrect && "border-white/10 bg-white/5 opacity-50",
                       showCorrect && "border-emerald-400 bg-emerald-400/15",
                       showIncorrect && "border-red-400 bg-red-400/15"
@@ -156,7 +156,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
                   </div>
                   <Button
                     onClick={() => onResolved(result)}
-                    className="mt-4 w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90"
+                    className="mt-4 w-full btn-brand btn-glow hover:opacity-90"
                   >
                     {result.correct ? "Get my 3 pieces" : "Try another question"}
                   </Button>

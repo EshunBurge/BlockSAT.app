@@ -37,7 +37,7 @@ export default function LoginPage() {
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <Link href="/forgot-password" className="text-xs text-orange-300 hover:underline">Forgot password?</Link>
+            <Link href="/forgot-password" className="text-xs text-scheme-accent hover:underline">Forgot password?</Link>
           </div>
           <Input id="password" type="password" placeholder="••••••••" className="bg-white/10 border-white/20 text-white placeholder:text-white/40" {...register("password")} />
           {errors.password && <p className="text-sm text-red-300">{errors.password.message}</p>}
@@ -45,14 +45,14 @@ export default function LoginPage() {
 
         {logIn.isError && <p className="text-sm text-red-300">{(logIn.error as Error).message}</p>}
 
-        <Button type="submit" disabled={logIn.isPending} className="mt-2 bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button type="submit" disabled={logIn.isPending} className="mt-2 btn-brand btn-glow hover:opacity-90">
           {logIn.isPending ? "Logging in..." : "Log in"}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-white/70">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="font-medium text-orange-300 hover:underline">Sign up</Link>
+        <Link href="/signup" className="font-medium text-scheme-accent hover:underline">Sign up</Link>
       </p>
     </div>
   );

@@ -138,19 +138,23 @@
 /* (set on the AppShell wrapper from the player's saved profile) swaps    */
 /* the whole app's palette instantly. "classic" is the default (:root).   */
 /* ---------------------------------------------------------------------- */
+/* "classic" (default) — black & white glam: gold + silver on near-black,   */
+/* matching the leopard/zebra-print, disco-ball, sequin moodboard.         */
 :root {
-  --scheme-hero-1: #ff9a5a33;
-  --scheme-hero-2: #8b5cf655;
-  --scheme-bg-a: #1b0f2e;
-  --scheme-bg-b: #2a1445;
-  --scheme-bg-c: #4a1d5c;
-  --scheme-bg-d: #7a2a52;
-  --scheme-app-a: #1e1033;
-  --scheme-app-b: #2c1650;
-  --scheme-app-c: #3a1a4a;
-  --scheme-glow: rgba(255, 180, 120, 0.5);
-  --scheme-glow-shadow: rgba(249, 115, 22, 0.5);
-  --scheme-accent: #fb923c;
+  --scheme-hero-1: #d4af3733;
+  --scheme-hero-2: #e5e5e540;
+  --scheme-bg-a: #050505;
+  --scheme-bg-b: #0c0c0c;
+  --scheme-bg-c: #161616;
+  --scheme-bg-d: #232323;
+  --scheme-app-a: #060606;
+  --scheme-app-b: #101010;
+  --scheme-app-c: #1a1a1a;
+  --scheme-glow: rgba(212, 175, 55, 0.45);
+  --scheme-glow-shadow: rgba(212, 175, 55, 0.45);
+  --scheme-accent: #d4af37;
+  --scheme-accent-from: #f5e1a4;
+  --scheme-accent-to: #b8860b;
 }
 
 [data-theme="midnight"] {
@@ -166,6 +170,8 @@
   --scheme-glow: rgba(120, 170, 255, 0.5);
   --scheme-glow-shadow: rgba(59, 130, 246, 0.5);
   --scheme-accent: #60a5fa;
+  --scheme-accent-from: #93c5fd;
+  --scheme-accent-to: #2563eb;
 }
 
 [data-theme="sunset"] {
@@ -181,6 +187,8 @@
   --scheme-glow: rgba(255, 150, 130, 0.55);
   --scheme-glow-shadow: rgba(249, 115, 22, 0.55);
   --scheme-accent: #fb7185;
+  --scheme-accent-from: #fda4af;
+  --scheme-accent-to: #f97316;
 }
 
 [data-theme="forest"] {
@@ -196,6 +204,8 @@
   --scheme-glow: rgba(110, 231, 183, 0.5);
   --scheme-glow-shadow: rgba(16, 185, 129, 0.5);
   --scheme-accent: #34d399;
+  --scheme-accent-from: #6ee7b7;
+  --scheme-accent-to: #059669;
 }
 
 [data-theme="aurora"] {
@@ -211,6 +221,8 @@
   --scheme-glow: rgba(103, 232, 249, 0.5);
   --scheme-glow-shadow: rgba(34, 211, 238, 0.5);
   --scheme-accent: #22d3ee;
+  --scheme-accent-from: #67e8f9;
+  --scheme-accent-to: #7c3aed;
 }
 
 [data-theme="galaxy"] {
@@ -226,6 +238,8 @@
   --scheme-glow: rgba(196, 150, 255, 0.5);
   --scheme-glow-shadow: rgba(168, 85, 247, 0.5);
   --scheme-accent: #a855f7;
+  --scheme-accent-from: #d8b4fe;
+  --scheme-accent-to: #7e22ce;
 }
 
 @layer utilities {
@@ -251,5 +265,18 @@
   }
   .text-scheme-accent {
     color: var(--scheme-accent);
+  }
+  .border-scheme-accent {
+    border-color: var(--scheme-accent);
+  }
+  .bg-scheme-accent-10 {
+    background-color: color-mix(in srgb, var(--scheme-accent) 10%, transparent);
+  }
+  .bg-scheme-accent-15 {
+    background-color: color-mix(in srgb, var(--scheme-accent) 15%, transparent);
+  }
+  .btn-brand {
+    background-image: linear-gradient(to right, var(--scheme-accent-from), var(--scheme-accent-to));
+    color: #1a1206 !important;
   }
 }

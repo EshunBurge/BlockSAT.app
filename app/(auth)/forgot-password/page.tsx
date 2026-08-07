@@ -32,13 +32,13 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <div className="text-center">
-        <MailCheck className="mx-auto mb-4 h-12 w-12 text-orange-300" />
+        <MailCheck className="mx-auto mb-4 h-12 w-12 text-scheme-accent" />
         <h1 className="mb-2 text-2xl font-bold">Check your email</h1>
         <p className="mb-6 text-sm text-white/70">
           If an account exists for that email, we&apos;ve sent a password reset link.
         </p>
         {devLink && (
-          <Button render={<Link href={devLink} />} className="w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+          <Button render={<Link href={devLink} />} className="w-full btn-brand btn-glow hover:opacity-90">
             Reset my password
           </Button>
         )}
@@ -57,14 +57,14 @@ export default function ForgotPasswordPage() {
           <Input id="email" type="email" placeholder="you@example.com" className="bg-white/10 border-white/20 text-white placeholder:text-white/40" {...register("email")} />
           {errors.email && <p className="text-sm text-red-300">{errors.email.message}</p>}
         </div>
-        <Button type="submit" disabled={forgotPassword.isPending} className="mt-2 bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button type="submit" disabled={forgotPassword.isPending} className="mt-2 btn-brand btn-glow hover:opacity-90">
           {forgotPassword.isPending ? "Sending..." : "Send reset link"}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-white/70">
         Remembered your password?{" "}
-        <Link href="/login" className="font-medium text-orange-300 hover:underline">Log in</Link>
+        <Link href="/login" className="font-medium text-scheme-accent hover:underline">Log in</Link>
       </p>
     </div>
   );

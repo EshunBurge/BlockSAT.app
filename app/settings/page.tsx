@@ -41,7 +41,11 @@ export default function SettingsPage() {
 
       <div className="flex flex-col gap-6">
         <section className="glass-card rounded-2xl p-6">
-          <h2 className="mb-4 font-semibold">Practice Preferences</h2>
+          <h2 className="mb-4 font-semibold">Default Practice Preferences</h2>
+          <p className="mb-4 text-sm text-white/50">
+            You&apos;ll pick a focus and difficulty fresh before every game — these are just the defaults that get
+            pre-selected on that screen.
+          </p>
           <div className="mb-4">
             <Label className="mb-2 block text-sm text-white/70">What would you like to practice?</Label>
             <div className="flex gap-2">
@@ -51,7 +55,7 @@ export default function SettingsPage() {
                   onClick={() => updateProfile.mutate({ practiceFocus: opt })}
                   className={cn(
                     "rounded-lg border px-4 py-2 text-sm",
-                    profile.practiceFocus === opt ? "border-orange-400 bg-orange-400/15" : "border-white/15 hover:border-white/30"
+                    profile.practiceFocus === opt ? "border-scheme-accent bg-scheme-accent-15" : "border-white/15 hover:border-white/30"
                   )}
                 >
                   {opt[0] + opt.slice(1).toLowerCase()}
@@ -68,7 +72,7 @@ export default function SettingsPage() {
                   onClick={() => updateProfile.mutate({ difficulty: opt })}
                   className={cn(
                     "rounded-lg border px-4 py-2 text-sm",
-                    profile.difficulty === opt ? "border-orange-400 bg-orange-400/15" : "border-white/15 hover:border-white/30"
+                    profile.difficulty === opt ? "border-scheme-accent bg-scheme-accent-15" : "border-white/15 hover:border-white/30"
                   )}
                 >
                   {opt[0] + opt.slice(1).toLowerCase()}
@@ -103,7 +107,7 @@ export default function SettingsPage() {
                   className={cn(
                     "rounded-lg border px-4 py-2 text-sm",
                     !unlocked && "opacity-40",
-                    profile.activeTheme === t.slug ? "border-orange-400 bg-orange-400/15" : "border-white/15 hover:border-white/30"
+                    profile.activeTheme === t.slug ? "border-scheme-accent bg-scheme-accent-15" : "border-white/15 hover:border-white/30"
                   )}
                 >
                   {t.name}{!unlocked && " 🔒"}

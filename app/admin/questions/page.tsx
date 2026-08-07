@@ -136,7 +136,7 @@ export default function AdminQuestionsPage() {
           <Button variant="outline" className="border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white" onClick={() => fileInputRef.current?.click()}>
             <Upload className="mr-2 h-4 w-4" />Import CSV
           </Button>
-          <Button onClick={() => { setEditing(EMPTY); setEditingId(null); }} className="bg-gradient-to-r from-orange-400 to-red-500 hover:opacity-90">
+          <Button onClick={() => { setEditing(EMPTY); setEditingId(null); }} className="btn-brand hover:opacity-90">
             <Plus className="mr-2 h-4 w-4" />New Question
           </Button>
         </div>
@@ -263,7 +263,7 @@ function QuestionForm({
       </div>
 
       <DialogFooter>
-        <Button disabled={saving} onClick={() => onSave(form)} className="bg-gradient-to-r from-orange-400 to-red-500 hover:opacity-90">
+        <Button disabled={saving} onClick={() => onSave(form)} className="btn-brand hover:opacity-90">
           {saving ? "Saving..." : "Save Question"}
         </Button>
       </DialogFooter>

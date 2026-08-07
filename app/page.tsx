@@ -45,7 +45,7 @@ export default function LandingPage() {
           <Button render={<Link href="/login" />} variant="ghost" className="text-white hover:bg-white/10 hover:text-white">
             Log in
           </Button>
-          <Button render={<Link href="/signup" />} className="bg-gradient-to-r from-orange-400 to-red-500 text-white btn-glow hover:opacity-90">
+          <Button render={<Link href="/signup" />} className="btn-brand text-white btn-glow hover:opacity-90">
             Sign up free
           </Button>
         </nav>
@@ -53,18 +53,18 @@ export default function LandingPage() {
 
       <main className="flex-1">
         <section className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 pt-16 pb-20 text-center md:pt-24">
-          <span className="rounded-full glass-card px-4 py-1.5 text-sm font-medium text-orange-200">
+          <span className="rounded-full glass-card px-4 py-1.5 text-sm font-medium text-scheme-accent">
             Study meets Block Blast
           </span>
           <h1 className="text-glow max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-            Answer questions. Unlock pieces. <span className="bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">Stack your way to a better score.</span>
+            Answer questions. Unlock pieces. <span className="bg-[linear-gradient(to_right,#f5e7c1,#d4af37,#e8e8e8)] bg-clip-text text-transparent">Stack your way to a better score.</span>
           </h1>
           <p className="max-w-2xl text-lg text-white/80">
             BlockSAT turns SAT prep into an addictive puzzle game. Answer a question correctly to earn 3 pieces,
             then clear rows, chain combos, and climb the leaderboard while you study.
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-            <Button render={<Link href="/signup" />} size="lg" className="bg-gradient-to-r from-orange-400 to-red-500 text-white btn-glow hover:opacity-90">
+            <Button render={<Link href="/signup" />} size="lg" className="btn-brand text-white btn-glow hover:opacity-90">
               Start playing free
             </Button>
             <Button render={<Link href="/login" />} size="lg" variant="outline" className="border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white">
@@ -76,7 +76,7 @@ export default function LandingPage() {
         <section className="mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pb-24 md:grid-cols-3">
           {FEATURES.map((f) => (
             <div key={f.title} className="glass-card rounded-2xl p-6">
-              <f.icon className="mb-3 h-8 w-8 text-orange-300" />
+              <f.icon className="mb-3 h-8 w-8 text-scheme-accent" />
               <h3 className="mb-2 text-lg font-semibold">{f.title}</h3>
               <p className="text-sm text-white/70">{f.description}</p>
             </div>

@@ -39,13 +39,13 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold">Welcome back, {profile.username}</h1>
           <p className="text-white/60">Ready to unlock some pieces?</p>
         </div>
-        <Button render={<Link href="/play" />} size="lg" className="bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button render={<Link href="/play" />} size="lg" className="btn-brand btn-glow hover:opacity-90">
           <Play className="mr-2 h-5 w-5" />Continue Playing
         </Button>
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatTile icon={Trophy} label="Highest Score" value={profile.highestScore.toLocaleString()} accent="bg-gradient-to-br from-orange-400 to-red-500" />
+        <StatTile icon={Trophy} label="Highest Score" value={profile.highestScore.toLocaleString()} accent="bg-gradient-to-br from-amber-300 to-neutral-500" />
         <StatTile icon={Sparkles} label="Current XP" value={profile.xp.toLocaleString()} accent="bg-gradient-to-br from-purple-400 to-indigo-500" />
         <StatTile icon={Flame} label="Weekly Streak" value={`${profile.streak} day${profile.streak === 1 ? "" : "s"}`} accent="bg-gradient-to-br from-pink-400 to-rose-500" />
         <StatTile icon={Target} label="Accuracy" value={`${accuracy}%`} accent="bg-gradient-to-br from-emerald-400 to-teal-500" />
@@ -61,7 +61,7 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="glass-card rounded-2xl p-6">
-          <h2 className="mb-4 flex items-center gap-2 font-semibold"><Flame className="h-5 w-5 text-orange-300" />Daily Challenges</h2>
+          <h2 className="mb-4 flex items-center gap-2 font-semibold"><Flame className="h-5 w-5 text-scheme-accent" />Daily Challenges</h2>
           <div className="flex flex-col gap-4">
             {challenges?.map((c) => (
               <div key={c.id}>
@@ -78,12 +78,12 @@ export default function DashboardPage() {
         </div>
 
         <div className="glass-card rounded-2xl p-6">
-          <h2 className="mb-4 flex items-center gap-2 font-semibold"><Gamepad2 className="h-5 w-5 text-orange-300" />Recent Games</h2>
+          <h2 className="mb-4 flex items-center gap-2 font-semibold"><Gamepad2 className="h-5 w-5 text-scheme-accent" />Recent Games</h2>
           <div className="flex flex-col gap-3">
             {recentGames?.map((g) => (
               <div key={g.id} className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2 text-sm">
                 <span>{new Date(g.startedAt).toLocaleDateString()}</span>
-                <span className="font-semibold text-orange-300">{g.score.toLocaleString()} pts</span>
+                <span className="font-semibold text-scheme-accent">{g.score.toLocaleString()} pts</span>
                 <span className="text-white/50">{g.linesCleared} lines</span>
               </div>
             ))}

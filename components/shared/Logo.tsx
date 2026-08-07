@@ -38,7 +38,7 @@ export function LogoWordmark({ className }: { className?: string }) {
     <div className={cn("flex items-center gap-2 font-extrabold tracking-tight", className)}>
       <Logo size={28} />
       <span>
-        Block<span className="text-orange-400">SAT</span>
+        Block<span className="text-scheme-accent">SAT</span>
       </span>
     </div>
   );

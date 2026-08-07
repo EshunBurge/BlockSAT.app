@@ -54,7 +54,7 @@ export default function AdminOverviewPage() {
             {data?.topPlayers.map((p, i) => (
               <div key={p.username} className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2 text-sm">
                 <span>#{i + 1} {p.username}</span>
-                <span className="text-orange-300">{p.highestScore.toLocaleString()} pts · Lvl {p.level}</span>
+                <span className="text-scheme-accent">{p.highestScore.toLocaleString()} pts · Lvl {p.level}</span>
               </div>
             ))}
           </div>

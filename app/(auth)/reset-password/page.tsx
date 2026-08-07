@@ -52,7 +52,7 @@ function ResetPasswordForm() {
         <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-green-400" />
         <h1 className="mb-2 text-2xl font-bold">Password updated</h1>
         <p className="mb-6 text-sm text-white/70">You can now log in with your new password.</p>
-        <Button onClick={() => router.push("/login")} className="w-full bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button onClick={() => router.push("/login")} className="w-full btn-brand btn-glow hover:opacity-90">
           Go to login
         </Button>
       </div>
@@ -78,13 +78,13 @@ function ResetPasswordForm() {
 
         {resetPassword.isError && <p className="text-sm text-red-300">{(resetPassword.error as Error).message}</p>}
 
-        <Button type="submit" disabled={resetPassword.isPending} className="mt-2 bg-gradient-to-r from-orange-400 to-red-500 btn-glow hover:opacity-90">
+        <Button type="submit" disabled={resetPassword.isPending} className="mt-2 btn-brand btn-glow hover:opacity-90">
           {resetPassword.isPending ? "Updating..." : "Update password"}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-white/70">
-        <Link href="/login" className="font-medium text-orange-300 hover:underline">Back to login</Link>
+        <Link href="/login" className="font-medium text-scheme-accent hover:underline">Back to login</Link>
       </p>
     </div>
   );

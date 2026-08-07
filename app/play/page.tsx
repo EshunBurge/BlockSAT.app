@@ -9,11 +9,13 @@ import { PieceTray } from "@/components/game/PieceTray";
 import { DragGhost } from "@/components/game/DragGhost";
 import { FloatingScorePopups } from "@/components/game/FloatingScorePopups";
 import { GameOverModal } from "@/components/game/GameOverModal";
+import { GameSetupCard } from "@/components/game/GameSetupCard";
 import { QuestionModal } from "@/components/questions/QuestionModal";
 import { useGameStore } from "@/stores/gameStore";
 import { useProfile } from "@/hooks/useProfile";
 import { canPlace, BOARD_SIZE } from "@/lib/game/board";
 import { useSound } from "@/hooks/useSound";
+import { PracticeFocus, Difficulty } from "@/types";
 import { Trophy, Flame, Layers } from "lucide-react";
 
 interface DragState {
@@ -58,14 +60,16 @@ export default function PlayPage() {
   const [questionCount, setQuestionCount] = useState(0);
   const [gameEnded, setGameEnded] = useState<{ xpEarned: number; newAchievements: { name: string }[] } | null>(null);
   const [cellSize, setCellSize] = useState(48);
+  // Asked fresh before every game, rather than a one-time signup preference.
+  const [setup, setSetup] = useState<{ focus: PracticeFocus; difficulty: Difficulty } | null>(null);
 
-  useEffect(() => {
+  const startGame = (focus: PracticeFocus, difficulty: Difficulty) => {
+    setSetup({ focus, difficulty });
     initGame();
     fetch("/api/game/start", { method: "POST" })
       .then((r) => r.json())
       .then((d) => setSessionId(d.sessionId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   useEffect(() => {
     const el = boardRef.current;
@@ -75,7 +79,7 @@ export default function PlayPage() {
     const observer = new ResizeObserver(updateSize);
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [setup]);
 
   const updatePreview = useCallback(
     (clientX: number, clientY: number, piece: { shape: boolean[][]; color: string }) => {
@@ -201,22 +205,34 @@ export default function PlayPage() {
   };
 
   const handlePlayAgain = () => {
+    // Re-prompt for focus/difficulty before every new game rather than
+    // silently reusing the last game's picks.
     setGameEnded(null);
     setQuestionCount(0);
-    initGame();
-    fetch("/api/game/start", { method: "POST" })
-      .then((r) => r.json())
-      .then((d) => setSessionId(d.sessionId));
+    setSessionId(null);
+    setSetup(null);
   };
 
   if (!profile) return <AppShell><div /></AppShell>;
+
+  if (!setup) {
+    return (
+      <AppShell>
+        <GameSetupCard
+          defaultFocus={profile.practiceFocus}
+          defaultDifficulty={profile.difficulty}
+          onStart={startGame}
+        />
+      </AppShell>
+    );
+  }
 
   return (
     <AppShell>
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-4">
         <div className="grid w-full grid-cols-3 gap-3">
           <div className="glass-card flex items-center gap-2 rounded-xl px-4 py-2.5">
-            <Trophy className="h-5 w-5 text-orange-300" />
+            <Trophy className="h-5 w-5 text-scheme-accent" />
             <div><p className="text-lg font-bold leading-none">{score.toLocaleString()}</p><p className="text-xs text-white/50">Score</p></div>
           </div>
           <div className="glass-card flex items-center gap-2 rounded-xl px-4 py-2.5">
@@ -250,8 +266,8 @@ export default function PlayPage() {
       <QuestionModal
         key={questionCount}
         open={awaitingReward && !gameOver}
-        practiceFocus={profile.practiceFocus}
-        difficulty={profile.difficulty}
+        practiceFocus={setup.focus}
+        difficulty={setup.difficulty}
         questionNumber={questionCount + 1}
         onResolved={handleQuestionResolved}
       />

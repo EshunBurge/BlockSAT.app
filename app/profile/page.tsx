@@ -40,7 +40,7 @@ export default function ProfilePage() {
     <AppShell>
       <div className="mb-6 flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
         <Avatar className="h-20 w-20 border-4 border-white/20">
-          <AvatarFallback className="bg-gradient-to-br from-orange-400 to-purple-500 text-2xl text-white">
+          <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-2xl text-white">
             {profile.username.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
@@ -60,7 +60,7 @@ export default function ProfilePage() {
 
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
         <div className="glass-card rounded-2xl p-5 text-center">
-          <Trophy className="mx-auto mb-2 h-6 w-6 text-orange-300" />
+          <Trophy className="mx-auto mb-2 h-6 w-6 text-scheme-accent" />
           <p className="text-xl font-bold">{profile.highestScore.toLocaleString()}</p>
           <p className="text-xs text-white/50">Highest Score</p>
         </div>
@@ -91,10 +91,10 @@ export default function ProfilePage() {
                 key={a.slug}
                 className={cn(
                   "flex flex-col items-center gap-1 rounded-xl border p-3 text-center",
-                  unlocked ? "border-orange-400/40 bg-orange-400/10" : "border-white/10 bg-white/5 opacity-50"
+                  unlocked ? "border-scheme-accent/40 bg-scheme-accent-10" : "border-white/10 bg-white/5 opacity-50"
                 )}
               >
-                {unlocked ? <Trophy className="h-6 w-6 text-orange-300" /> : <Lock className="h-6 w-6 text-white/40" />}
+                {unlocked ? <Trophy className="h-6 w-6 text-scheme-accent" /> : <Lock className="h-6 w-6 text-white/40" />}
                 <p className="text-xs font-medium">{a.name}</p>
               </div>
             );
@@ -108,7 +108,7 @@ export default function ProfilePage() {
           {recentGames?.map((g) => (
             <div key={g.id} className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2 text-sm">
               <span className="text-white/60">{new Date(g.startedAt).toLocaleString()}</span>
-              <span className="font-semibold text-orange-300">{g.score.toLocaleString()} pts</span>
+              <span className="font-semibold text-scheme-accent">{g.score.toLocaleString()} pts</span>
             </div>
           ))}
           {recentGames?.length === 0 && <p className="text-sm text-white/50">No recent games yet.</p>}

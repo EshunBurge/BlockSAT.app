@@ -28,8 +28,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     if (isLoading) return;
     if (!profile) {
       router.replace("/login");
-    } else if (!profile.onboardingDone) {
-      router.replace("/onboarding");
     }
   }, [isLoading, profile, router]);
 
@@ -66,7 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 rounded-full bg-white/10 px-2 py-1.5 pr-3 hover:bg-white/15">
               <Avatar className="h-7 w-7">
-                <AvatarFallback className="bg-gradient-to-br from-orange-400 to-purple-500 text-xs text-white">
+                <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
                   {profile?.username?.slice(0, 2).toUpperCase() ?? "??"}
                 </AvatarFallback>
               </Avatar>
