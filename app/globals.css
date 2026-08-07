@@ -138,11 +138,10 @@
 /* (set on the AppShell wrapper from the player's saved profile) swaps    */
 /* the whole app's palette instantly. "classic" is the default (:root).   */
 /* ---------------------------------------------------------------------- */
-/* "classic" (default) — black & white glam: gold + silver on near-black,   */
-/* matching the leopard/zebra-print, disco-ball, sequin moodboard.         */
+/* "classic" (default) — matches the BlockSAT logo: flat gold on near-black. */
 :root {
-  --scheme-hero-1: #d4af3733;
-  --scheme-hero-2: #e5e5e540;
+  --scheme-hero-1: #e6b17022;
+  --scheme-hero-2: #ffffff18;
   --scheme-bg-a: #050505;
   --scheme-bg-b: #0c0c0c;
   --scheme-bg-c: #161616;
@@ -150,11 +149,11 @@
   --scheme-app-a: #060606;
   --scheme-app-b: #101010;
   --scheme-app-c: #1a1a1a;
-  --scheme-glow: rgba(212, 175, 55, 0.45);
-  --scheme-glow-shadow: rgba(212, 175, 55, 0.45);
-  --scheme-accent: #d4af37;
-  --scheme-accent-from: #f5e1a4;
-  --scheme-accent-to: #b8860b;
+  --scheme-glow: rgba(230, 177, 112, 0.3);
+  --scheme-glow-shadow: rgba(230, 177, 112, 0.3);
+  --scheme-accent: #e6b170;
+  --scheme-accent-from: #e6b170;
+  --scheme-accent-to: #d19a5c;
 }
 
 [data-theme="midnight"] {
@@ -252,16 +251,16 @@
     background: linear-gradient(160deg, var(--scheme-app-a) 0%, var(--scheme-app-b) 45%, var(--scheme-app-c) 100%);
   }
   .glass-card {
-    @apply bg-white/10 backdrop-blur-xl border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.25)];
+    @apply bg-white/10 backdrop-blur-xl border border-white/15 shadow-[0_1px_3px_rgba(0,0,0,0.15)];
   }
   .glass-card-light {
-    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)];
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_1px_3px_rgba(0,0,0,0.06)];
   }
   .text-glow {
-    text-shadow: 0 0 20px var(--scheme-glow);
+    text-shadow: 0 0 1px var(--scheme-glow);
   }
   .btn-glow {
-    box-shadow: 0 8px 24px -4px var(--scheme-glow-shadow);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
   }
   .text-scheme-accent {
     color: var(--scheme-accent);

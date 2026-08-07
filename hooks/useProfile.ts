@@ -31,3 +31,35 @@ export function useUpdateProfile() {
     },
   });
 }
+
+export function useUploadAvatar() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/profile/avatar", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to upload photo");
+      return data.profile as ProfileDTO;
+    },
+    onSuccess: (profile) => {
+      queryClient.setQueryData(["profile"], profile);
+    },
+  });
+}
+
+export function useRemoveAvatar() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const res = await fetch("/api/profile/avatar", { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to remove photo");
+      return data.profile as ProfileDTO;
+    },
+    onSuccess: (profile) => {
+      queryClient.setQueryData(["profile"], profile);
+    },
+  });
+}

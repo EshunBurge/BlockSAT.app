@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LogoWordmark } from "@/components/shared/Logo";
 import { useProfile } from "@/hooks/useProfile";
 import { useLogOut } from "@/hooks/useAuth";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { LayoutDashboard, Gamepad2, Trophy, User, Settings, Shield, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -43,7 +43,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div data-theme={profile.activeTheme} className="flex min-h-screen flex-1 flex-col bg-blocksat-app text-white">
       <header className="sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-          <Link href="/dashboard"><LogoWordmark className="text-lg" /></Link>
+          <Link href="/dashboard"><LogoWordmark height={24} /></Link>
 
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_ITEMS.map((item) => (
@@ -64,6 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 rounded-full bg-white/10 px-2 py-1.5 pr-3 hover:bg-white/15">
               <Avatar className="h-7 w-7">
+                {profile?.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
                 <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
                   {profile?.username?.slice(0, 2).toUpperCase() ?? "??"}
                 </AvatarFallback>

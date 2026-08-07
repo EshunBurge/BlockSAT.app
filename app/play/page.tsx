@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import confetti from "canvas-confetti";
 import { toast } from "sonner";
 import { AppShell } from "@/components/shared/AppShell";
+import { Button } from "@/components/ui/button";
 import { GameBoard } from "@/components/game/GameBoard";
 import { PieceTray } from "@/components/game/PieceTray";
 import { DragGhost } from "@/components/game/DragGhost";
@@ -62,9 +63,12 @@ export default function PlayPage() {
   const [cellSize, setCellSize] = useState(48);
   // Asked fresh before every game, rather than a one-time signup preference.
   const [setup, setSetup] = useState<{ focus: PracticeFocus; difficulty: Difficulty } | null>(null);
+  // Lets the player back out of a question instead of being forced to answer it.
+  const [questionDismissed, setQuestionDismissed] = useState(false);
 
   const startGame = (focus: PracticeFocus, difficulty: Difficulty) => {
     setSetup({ focus, difficulty });
+    setQuestionDismissed(false);
     initGame();
     fetch("/api/game/start", { method: "POST" })
       .then((r) => r.json())
@@ -192,6 +196,7 @@ export default function PlayPage() {
   const handleQuestionResolved = (result: { correct: boolean; leveledUp: boolean; newLevel: number }) => {
     resolveQuestion(result.correct);
     setQuestionCount((n) => n + 1);
+    setQuestionDismissed(false);
     if (result.correct) {
       play("correct");
       toast.success("Correct! Here are your 3 pieces.", { duration: 1800 });
@@ -257,6 +262,15 @@ export default function PlayPage() {
             Place all 3 pieces to earn another question and 3 more.
           </p>
         )}
+
+        {awaitingReward && questionDismissed && !gameOver && (
+          <Button
+            onClick={() => setQuestionDismissed(false)}
+            className="btn-brand btn-glow hover:opacity-90"
+          >
+            Answer a question for 3 pieces
+          </Button>
+        )}
       </div>
 
       {drag && (
@@ -265,11 +279,12 @@ export default function PlayPage() {
 
       <QuestionModal
         key={questionCount}
-        open={awaitingReward && !gameOver}
+        open={awaitingReward && !gameOver && !questionDismissed}
         practiceFocus={setup.focus}
         difficulty={setup.difficulty}
         questionNumber={questionCount + 1}
         onResolved={handleQuestionResolved}
+        onExit={() => setQuestionDismissed(true)}
       />
 
       <GameOverModal

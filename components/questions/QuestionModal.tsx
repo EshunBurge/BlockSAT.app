@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useFetchQuestion, useSubmitAnswer, AnswerResult } from "@/hooks/useQuestion";
 import { PracticeFocus, Difficulty, Subject } from "@/types";
-import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { CheckCircle2, XCircle, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface QuestionModalProps {
@@ -16,6 +16,8 @@ interface QuestionModalProps {
   difficulty: Difficulty;
   questionNumber: number;
   onResolved: (result: AnswerResult) => void;
+  /** Lets the player back out of the question without answering it. */
+  onExit: () => void;
 }
 
 const DIFFICULTY_COLOR: Record<Difficulty, string> = {
@@ -29,7 +31,7 @@ function pickSubject(focus: PracticeFocus): Subject | undefined {
   return focus;
 }
 
-export function QuestionModal({ open, practiceFocus, difficulty, questionNumber, onResolved }: QuestionModalProps) {
+export function QuestionModal({ open, practiceFocus, difficulty, questionNumber, onResolved, onExit }: QuestionModalProps) {
   const fetchQuestion = useFetchQuestion();
   const submitAnswer = useSubmitAnswer();
   const [selected, setSelected] = useState<"A" | "B" | "C" | "D" | null>(null);
@@ -77,7 +79,17 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
 
   return (
     <Dialog open={open}>
-      <DialogContent showCloseButton={false} className="max-w-xl border-white/10 bg-[#1e1033] text-white sm:max-w-xl">
+      <DialogContent showCloseButton={false} className="max-w-xl border-white/10 bg-[var(--scheme-app-c)] text-white sm:max-w-xl">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          onClick={onExit}
+          aria-label="Exit question"
+          className="absolute top-3 right-3 text-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <X className="h-4 w-4" />
+        </Button>
         {fetchQuestion.isPending || !question ? (
           <div className="flex flex-col items-center justify-center gap-3 py-16 text-white/60">
             <Loader2 className="h-8 w-8 animate-spin" />

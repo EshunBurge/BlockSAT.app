@@ -181,7 +181,7 @@ export default function AdminQuestionsPage() {
       </div>
 
       <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="max-w-2xl border-white/10 bg-[#1e1033] text-white">
+        <DialogContent className="max-w-2xl border-white/10 bg-[var(--scheme-app-c)] text-white">
           <DialogHeader><DialogTitle>{editingId ? "Edit Question" : "New Question"}</DialogTitle></DialogHeader>
           {editing && (
             <QuestionForm

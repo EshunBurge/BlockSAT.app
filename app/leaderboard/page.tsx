@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AppShell } from "@/components/shared/AppShell";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -73,6 +73,7 @@ export default function LeaderboardPage() {
                 {i < 3 ? <Trophy className="h-4 w-4" /> : i + 1}
               </span>
               <Avatar className="h-8 w-8">
+                {entry.avatarUrl && <AvatarImage src={entry.avatarUrl} alt={entry.username} />}
                 <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
                   {entry.username.slice(0, 2).toUpperCase()}
                 </AvatarFallback>

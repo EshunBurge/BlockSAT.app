@@ -4,7 +4,7 @@ import { AppShell } from "@/components/shared/AppShell";
 import { useProfile } from "@/hooks/useProfile";
 import { useRecentGames } from "@/hooks/useRecentGames";
 import { Progress } from "@/components/ui/progress";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { levelFromXp } from "@/lib/game/leveling";
 import { ACHIEVEMENT_DEFS } from "@/lib/game/achievements";
 import { useQuery } from "@tanstack/react-query";
@@ -40,6 +40,7 @@ export default function ProfilePage() {
     <AppShell>
       <div className="mb-6 flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
         <Avatar className="h-20 w-20 border-4 border-white/20">
+          {profile.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
           <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-2xl text-white">
             {profile.username.slice(0, 2).toUpperCase()}
           </AvatarFallback>

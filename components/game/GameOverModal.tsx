@@ -19,7 +19,7 @@ interface GameOverModalProps {
 export function GameOverModal({ open, score, linesCleared, longestCombo, xpEarned, isNewHighScore, newAchievements, onPlayAgain }: GameOverModalProps) {
   return (
     <Dialog open={open}>
-      <DialogContent showCloseButton={false} className="max-w-md border-white/10 bg-[#1e1033] text-center text-white">
+      <DialogContent showCloseButton={false} className="max-w-md border-white/10 bg-[var(--scheme-app-c)] text-center text-white">
         <Trophy className="mx-auto mb-2 h-12 w-12 text-scheme-accent" />
         <h2 className="mb-1 text-2xl font-bold">Game Over</h2>
         {isNewHighScore && <p className="mb-3 text-sm font-medium text-scheme-accent">New personal best!</p>}

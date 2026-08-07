@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AppShell } from "@/components/shared/AppShell";
-import { useProfile, useUpdateProfile } from "@/hooks/useProfile";
+import { useProfile, useUpdateProfile, useUploadAvatar, useRemoveAvatar } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { PracticeFocus, Difficulty } from "@/types";
 import { cn } from "@/lib/utils";
@@ -28,18 +29,81 @@ const THEMES = [
 export default function SettingsPage() {
   const { data: profile } = useProfile();
   const updateProfile = useUpdateProfile();
+  const uploadAvatar = useUploadAvatar();
+  const removeAvatar = useRemoveAvatar();
   const router = useRouter();
   const [username, setUsername] = useState(profile?.username ?? "");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!profile) return <AppShell><div /></AppShell>;
 
   const unlockedThemes = profile.unlockedThemes.split(",").filter(Boolean);
+
+  function handleAvatarFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image must be 2MB or smaller");
+      return;
+    }
+    uploadAvatar.mutate(file, {
+      onSuccess: () => toast.success("Profile picture updated"),
+      onError: (err) => toast.error((err as Error).message),
+    });
+  }
 
   return (
     <AppShell>
       <h1 className="mb-6 text-2xl font-bold">Settings</h1>
 
       <div className="flex flex-col gap-6">
+        <section className="glass-card rounded-2xl p-6">
+          <h2 className="mb-4 font-semibold">Profile Picture</h2>
+          <div className="flex items-center gap-4">
+            <Avatar className="h-16 w-16 border-2 border-white/20">
+              {profile.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
+              <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-lg text-white">
+                {profile.username.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                className="hidden"
+                onChange={handleAvatarFile}
+              />
+              <Button
+                type="button"
+                variant="outline"
+                disabled={uploadAvatar.isPending}
+                onClick={() => fileInputRef.current?.click()}
+                className="border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white"
+              >
+                {uploadAvatar.isPending ? "Uploading..." : "Upload photo"}
+              </Button>
+              {profile.avatarUrl && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  disabled={removeAvatar.isPending}
+                  onClick={() =>
+                    removeAvatar.mutate(undefined, {
+                      onSuccess: () => toast.success("Profile picture removed"),
+                      onError: (err) => toast.error((err as Error).message),
+                    })
+                  }
+                  className="text-white/60 hover:bg-white/10 hover:text-white"
+                >
+                  Remove photo
+                </Button>
+              )}
+            </div>
+          </div>
+        </section>
+
         <section className="glass-card rounded-2xl p-6">
           <h2 className="mb-4 font-semibold">Default Practice Preferences</h2>
           <p className="mb-4 text-sm text-white/50">

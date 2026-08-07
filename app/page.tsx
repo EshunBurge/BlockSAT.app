@@ -40,7 +40,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col flex-1 bg-blocksat-hero text-white">
       <header className="flex items-center justify-between px-6 py-5 md:px-12">
-        <LogoWordmark className="text-xl" />
+        <LogoWordmark height={28} />
         <nav className="flex items-center gap-2">
           <Button render={<Link href="/login" />} variant="ghost" className="text-white hover:bg-white/10 hover:text-white">
             Log in
@@ -57,7 +57,7 @@ export default function LandingPage() {
             Study meets Block Blast
           </span>
           <h1 className="text-glow max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-            Answer questions. Unlock pieces. <span className="bg-[linear-gradient(to_right,#f5e7c1,#d4af37,#e8e8e8)] bg-clip-text text-transparent">Stack your way to a better score.</span>
+            Answer questions. Unlock pieces. <span className="text-scheme-accent">Stack your way to a better score.</span>
           </h1>
           <p className="max-w-2xl text-lg text-white/80">
             BlockSAT turns SAT prep into an addictive puzzle game. Answer a question correctly to earn 3 pieces,
