@@ -2,14 +2,24 @@
 // Local dev uses SQLite (see .env DATABASE_URL="file:./dev.db").
 // For production, point DATABASE_URL at your Supabase Postgres connection
 // string and change the provider below to "postgresql" (see README).
+//
+// When using Supabase's pooled connection, DATABASE_URL should be the
+// transaction-mode pooler URL (port 6543, used by the app at runtime) and
+// DIRECT_URL should be the session-mode pooler URL (port 5432) — Prisma
+// needs the unpooled/session connection to run migrations, since the
+// transaction pooler doesn't support the prepared statements migrations
+// rely on. DIRECT_URL is only read by Prisma CLI commands (migrate/db
+// push), never by the running app, so it's safe to leave unset for SQLite
+// dev.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "sqlite"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // Prisma Client is generated to lib/generated/prisma by default with this
