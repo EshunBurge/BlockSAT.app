@@ -131,15 +131,18 @@ const SHAPES: PieceShape[] = [
   ],
 ];
 
+// Pieces are colored from the player's active board theme (CSS variables set
+// per `data-theme` in globals.css) rather than a fixed rainbow palette, so
+// they always match the rest of the app's color scheme. Because these are
+// CSS variable references (not literal hex values), a piece's rendered
+// color updates automatically if the player switches themes later, even
+// for pieces already placed on the board.
 export const PIECE_COLORS = [
-  "#f97316", // orange
-  "#ef4444", // red
-  "#3b82f6", // blue
-  "#8b5cf6", // violet
-  "#22c55e", // green
-  "#eab308", // yellow
-  "#ec4899", // pink
-  "#06b6d4", // cyan
+  "var(--scheme-piece-1)",
+  "var(--scheme-piece-2)",
+  "var(--scheme-piece-3)",
+  "var(--scheme-piece-4)",
+  "var(--scheme-piece-5)",
 ];
 
 export function randomShape(): PieceShape {

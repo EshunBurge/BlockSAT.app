@@ -36,7 +36,7 @@ export function PieceTray({ pieces, draggingPieceId, onDragStart }: PieceTrayPro
   const slots = Array.from({ length: 3 }, (_, i) => pieces[i] ?? null);
 
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="mx-auto grid w-full max-w-[520px] grid-cols-3 gap-3">
       {slots.map((piece, i) => (
         <div
           key={piece?.id ?? `empty-${i}`}

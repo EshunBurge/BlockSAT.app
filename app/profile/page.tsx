@@ -41,7 +41,7 @@ export default function ProfilePage() {
       <div className="mb-6 flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
         <Avatar className="h-20 w-20 border-4 border-white/20">
           {profile.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
-          <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-2xl text-white">
+          <AvatarFallback className="bg-scheme-gradient text-2xl text-white">
             {profile.username.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
@@ -66,17 +66,17 @@ export default function ProfilePage() {
           <p className="text-xs text-white/50">Highest Score</p>
         </div>
         <div className="glass-card rounded-2xl p-5 text-center">
-          <Gamepad2 className="mx-auto mb-2 h-6 w-6 text-purple-300" />
+          <Gamepad2 className="mx-auto mb-2 h-6 w-6 text-scheme-accent" />
           <p className="text-xl font-bold">{profile.gamesPlayed}</p>
           <p className="text-xs text-white/50">Games Played</p>
         </div>
         <div className="glass-card rounded-2xl p-5 text-center">
-          <Target className="mx-auto mb-2 h-6 w-6 text-emerald-300" />
+          <Target className="mx-auto mb-2 h-6 w-6 text-scheme-accent" />
           <p className="text-xl font-bold">{accuracy}%</p>
           <p className="text-xs text-white/50">Overall Accuracy</p>
         </div>
         <div className="glass-card rounded-2xl p-5 text-center">
-          <BookOpen className="mx-auto mb-2 h-6 w-6 text-pink-300" />
+          <BookOpen className="mx-auto mb-2 h-6 w-6 text-scheme-accent" />
           <p className="text-xl font-bold">{readingAcc}% / {mathAcc}%</p>
           <p className="text-xs text-white/50">Reading / Math Acc.</p>
         </div>

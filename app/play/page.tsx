@@ -241,11 +241,11 @@ export default function PlayPage() {
             <div><p className="text-lg font-bold leading-none">{score.toLocaleString()}</p><p className="text-xs text-white/50">Score</p></div>
           </div>
           <div className="glass-card flex items-center gap-2 rounded-xl px-4 py-2.5">
-            <Layers className="h-5 w-5 text-purple-300" />
+            <Layers className="h-5 w-5 text-scheme-accent" />
             <div><p className="text-lg font-bold leading-none">{linesCleared}</p><p className="text-xs text-white/50">Lines</p></div>
           </div>
           <div className="glass-card flex items-center gap-2 rounded-xl px-4 py-2.5">
-            <Flame className="h-5 w-5 text-pink-300" />
+            <Flame className="h-5 w-5 text-scheme-accent" />
             <div><p className="text-lg font-bold leading-none">x{comboStreak}</p><p className="text-xs text-white/50">Combo</p></div>
           </div>
         </div>

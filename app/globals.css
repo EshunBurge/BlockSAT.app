@@ -154,6 +154,14 @@
   --scheme-accent: #e6b170;
   --scheme-accent-from: #e6b170;
   --scheme-accent-to: #d19a5c;
+  --scheme-piece-1: #f3cd97;
+  --scheme-piece-2: #e6b170;
+  --scheme-piece-3: #cf9a5c;
+  --scheme-piece-4: #a97a45;
+  --scheme-piece-5: #8a6136;
+  --scheme-rank-1: #f3cd97;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #b9773f;
 }
 
 [data-theme="midnight"] {
@@ -171,6 +179,14 @@
   --scheme-accent: #60a5fa;
   --scheme-accent-from: #93c5fd;
   --scheme-accent-to: #2563eb;
+  --scheme-piece-1: #bfdbfe;
+  --scheme-piece-2: #93c5fd;
+  --scheme-piece-3: #60a5fa;
+  --scheme-piece-4: #3b82f6;
+  --scheme-piece-5: #2563eb;
+  --scheme-rank-1: #bfdbfe;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #2563eb;
 }
 
 [data-theme="sunset"] {
@@ -188,6 +204,14 @@
   --scheme-accent: #fb7185;
   --scheme-accent-from: #fda4af;
   --scheme-accent-to: #f97316;
+  --scheme-piece-1: #fecdd3;
+  --scheme-piece-2: #fda4af;
+  --scheme-piece-3: #fb7185;
+  --scheme-piece-4: #f97316;
+  --scheme-piece-5: #c2410c;
+  --scheme-rank-1: #fecdd3;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #c2410c;
 }
 
 [data-theme="forest"] {
@@ -205,6 +229,14 @@
   --scheme-accent: #34d399;
   --scheme-accent-from: #6ee7b7;
   --scheme-accent-to: #059669;
+  --scheme-piece-1: #a7f3d0;
+  --scheme-piece-2: #6ee7b7;
+  --scheme-piece-3: #34d399;
+  --scheme-piece-4: #10b981;
+  --scheme-piece-5: #047857;
+  --scheme-rank-1: #a7f3d0;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #047857;
 }
 
 [data-theme="aurora"] {
@@ -222,6 +254,14 @@
   --scheme-accent: #22d3ee;
   --scheme-accent-from: #67e8f9;
   --scheme-accent-to: #7c3aed;
+  --scheme-piece-1: #a5f3fc;
+  --scheme-piece-2: #67e8f9;
+  --scheme-piece-3: #22d3ee;
+  --scheme-piece-4: #a78bfa;
+  --scheme-piece-5: #7c3aed;
+  --scheme-rank-1: #a5f3fc;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #7c3aed;
 }
 
 [data-theme="galaxy"] {
@@ -239,6 +279,14 @@
   --scheme-accent: #a855f7;
   --scheme-accent-from: #d8b4fe;
   --scheme-accent-to: #7e22ce;
+  --scheme-piece-1: #e9d5ff;
+  --scheme-piece-2: #d8b4fe;
+  --scheme-piece-3: #a855f7;
+  --scheme-piece-4: #7e22ce;
+  --scheme-piece-5: #6366f1;
+  --scheme-rank-1: #e9d5ff;
+  --scheme-rank-2: #d4d4d4;
+  --scheme-rank-3: #6366f1;
 }
 
 @layer utilities {
@@ -277,5 +325,23 @@
   .btn-brand {
     background-image: linear-gradient(to right, var(--scheme-accent-from), var(--scheme-accent-to));
     color: #1a1206 !important;
+  }
+  .bg-scheme-gradient {
+    background-image: linear-gradient(135deg, var(--scheme-accent-from), var(--scheme-accent-to));
+  }
+  .bg-scheme-rank-1 {
+    background-color: var(--scheme-rank-1);
+  }
+  .bg-scheme-rank-2 {
+    background-color: var(--scheme-rank-2);
+  }
+  .bg-scheme-rank-3 {
+    background-color: var(--scheme-rank-3);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

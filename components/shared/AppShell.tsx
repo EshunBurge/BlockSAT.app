@@ -41,7 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div data-theme={profile.activeTheme} className="flex min-h-screen flex-1 flex-col bg-blocksat-app text-white">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur-lg">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-black/20 pt-safe backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
           <Link href="/dashboard"><LogoWordmark height={24} /></Link>
 
@@ -65,7 +65,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <DropdownMenuTrigger className="flex items-center gap-2 rounded-full bg-white/10 px-2 py-1.5 pr-3 hover:bg-white/15">
               <Avatar className="h-7 w-7">
                 {profile?.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
-                <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
+                <AvatarFallback className="bg-scheme-gradient text-xs text-white">
                   {profile?.username?.slice(0, 2).toUpperCase() ?? "??"}
                 </AvatarFallback>
               </Avatar>
@@ -102,7 +102,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 md:px-6 md:py-8">{children}</main>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-safe md:px-6 md:py-8">{children}</main>
     </div>
   );
 }

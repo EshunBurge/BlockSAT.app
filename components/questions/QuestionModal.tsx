@@ -86,7 +86,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
           size="icon-sm"
           onClick={onExit}
           aria-label="Exit question"
-          className="absolute top-3 right-3 text-white/50 hover:bg-white/10 hover:text-white"
+          className="absolute top-2 right-2 h-11 w-11 text-white/50 hover:bg-white/10 hover:text-white"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -97,7 +97,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
           </div>
         ) : (
           <div>
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between gap-3 pr-10">
               <div className="flex gap-2">
                 <Badge variant="outline" className="border-white/20 bg-white/10 text-white">
                   {question.subject === "READING" ? "Reading" : "Math"}
@@ -106,7 +106,7 @@ export function QuestionModal({ open, practiceFocus, difficulty, questionNumber,
                   {question.difficulty[0] + question.difficulty.slice(1).toLowerCase()}
                 </Badge>
               </div>
-              <span className="text-xs text-white/50">Question #{questionNumber}</span>
+              <span className="shrink-0 text-xs text-white/50">Question #{questionNumber}</span>
             </div>
 
             {question.passage && (

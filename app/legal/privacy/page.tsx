@@ -60,7 +60,7 @@ export default function PrivacyPage() {
       <p>We may update this Privacy Policy from time to time. We will note the &quot;Last updated&quot; date above when we do.</p>
 
       <h2>9. Contact</h2>
-      <p>Questions about this Privacy Policy can be sent to privacy@blocksat.app.</p>
+      <p>Questions about this Privacy Policy can be sent to <a href="mailto:privacy@blocksat.app">privacy@blocksat.app</a>.</p>
     </article>
   );
 }

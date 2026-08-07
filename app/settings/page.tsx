@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AppShell } from "@/components/shared/AppShell";
@@ -63,7 +64,7 @@ export default function SettingsPage() {
           <div className="flex items-center gap-4">
             <Avatar className="h-16 w-16 border-2 border-white/20">
               {profile.avatarUrl && <AvatarImage src={profile.avatarUrl} alt={profile.username} />}
-              <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-lg text-white">
+              <AvatarFallback className="bg-scheme-gradient text-lg text-white">
                 {profile.username.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
@@ -230,6 +231,21 @@ export default function SettingsPage() {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+        </section>
+
+        <section className="glass-card rounded-2xl p-6">
+          <h2 className="mb-4 font-semibold">Support &amp; Legal</h2>
+          <div className="flex flex-col gap-3 text-sm">
+            <a href="mailto:support@blocksat.app" className="text-scheme-accent hover:underline">
+              Contact support
+            </a>
+            <Link href="/legal/terms" className="text-white/70 hover:text-white hover:underline">
+              Terms of Service
+            </Link>
+            <Link href="/legal/privacy" className="text-white/70 hover:text-white hover:underline">
+              Privacy Policy
+            </Link>
+          </div>
         </section>
       </div>
     </AppShell>

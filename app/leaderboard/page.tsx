@@ -64,9 +64,9 @@ export default function LeaderboardPage() {
               <span
                 className={cn(
                   "flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-bold",
-                  i === 0 && "bg-gradient-to-br from-yellow-300 to-amber-500 text-black",
-                  i === 1 && "bg-gradient-to-br from-slate-300 to-slate-400 text-black",
-                  i === 2 && "bg-gradient-to-br from-orange-400 to-orange-600 text-black",
+                  i === 0 && "bg-scheme-rank-1 text-black",
+                  i === 1 && "bg-scheme-rank-2 text-black",
+                  i === 2 && "bg-scheme-rank-3 text-white",
                   i > 2 && "bg-white/10 text-white/60 text-sm"
                 )}
               >
@@ -74,7 +74,7 @@ export default function LeaderboardPage() {
               </span>
               <Avatar className="h-8 w-8">
                 {entry.avatarUrl && <AvatarImage src={entry.avatarUrl} alt={entry.username} />}
-                <AvatarFallback className="bg-gradient-to-br from-amber-300 to-neutral-500 text-xs text-white">
+                <AvatarFallback className="bg-scheme-gradient text-xs text-white">
                   {entry.username.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>

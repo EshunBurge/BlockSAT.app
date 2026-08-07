@@ -45,10 +45,10 @@ export default function DashboardPage() {
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatTile icon={Trophy} label="Highest Score" value={profile.highestScore.toLocaleString()} accent="bg-gradient-to-br from-amber-300 to-neutral-500" />
-        <StatTile icon={Sparkles} label="Current XP" value={profile.xp.toLocaleString()} accent="bg-gradient-to-br from-purple-400 to-indigo-500" />
-        <StatTile icon={Flame} label="Weekly Streak" value={`${profile.streak} day${profile.streak === 1 ? "" : "s"}`} accent="bg-gradient-to-br from-pink-400 to-rose-500" />
-        <StatTile icon={Target} label="Accuracy" value={`${accuracy}%`} accent="bg-gradient-to-br from-emerald-400 to-teal-500" />
+        <StatTile icon={Trophy} label="Highest Score" value={profile.highestScore.toLocaleString()} accent="bg-scheme-gradient" />
+        <StatTile icon={Sparkles} label="Current XP" value={profile.xp.toLocaleString()} accent="bg-scheme-gradient" />
+        <StatTile icon={Flame} label="Weekly Streak" value={`${profile.streak} day${profile.streak === 1 ? "" : "s"}`} accent="bg-scheme-gradient" />
+        <StatTile icon={Target} label="Accuracy" value={`${accuracy}%`} accent="bg-scheme-gradient" />
       </div>
 
       <div className="mb-6 glass-card rounded-2xl p-6">

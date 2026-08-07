@@ -75,7 +75,7 @@ export default function TermsPage() {
       </p>
 
       <h2>11. Contact</h2>
-      <p>Questions about these Terms can be sent to support@blocksat.app.</p>
+      <p>Questions about these Terms can be sent to <a href="mailto:support@blocksat.app">support@blocksat.app</a>.</p>
     </article>
   );
 }
