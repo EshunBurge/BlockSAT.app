@@ -1,23 +1,21 @@
 // BlockSAT Prisma Schema
-// Local dev uses SQLite (see .env DATABASE_URL="file:./dev.db").
-// For production, point DATABASE_URL at your Supabase Postgres connection
-// string and change the provider below to "postgresql" (see README).
+// This project runs on Supabase Postgres (set DATABASE_URL/DIRECT_URL in
+// .env to your Supabase connection strings). If you ever want a
+// zero-setup local SQLite DB instead, change `provider` below back to
+// "sqlite" and point DATABASE_URL at a local file (e.g. "file:./dev.db").
 //
-// When using Supabase's pooled connection, DATABASE_URL should be the
-// transaction-mode pooler URL (port 6543, used by the app at runtime) and
-// DIRECT_URL should be the session-mode pooler URL (port 5432) — Prisma
-// needs the unpooled/session connection to run migrations, since the
-// transaction pooler doesn't support the prepared statements migrations
-// rely on. DIRECT_URL is only read by Prisma CLI commands (migrate/db
-// push), never by the running app, so it's safe to leave unset for SQLite
-// dev.
+// DATABASE_URL should be Supabase's transaction-mode pooler URL (port
+// 6543, used by the app at runtime); DIRECT_URL should be the
+// session-mode pooler URL (port 5432) — Prisma needs the unpooled/session
+// connection to run migrations, since the transaction pooler doesn't
+// support the prepared statements migrations rely on.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "sqlite"
+  provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }

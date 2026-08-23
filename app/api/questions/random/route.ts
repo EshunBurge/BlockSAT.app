@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Prisma, Difficulty } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth/session";
+import { generateAIQuestion } from "@/lib/ai/generateQuestion";
 
 export async function GET(req: NextRequest) {
   const session = await getSession();
@@ -10,10 +11,28 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const subjectParam = searchParams.get("subject"); // READING | MATH | null (either)
   const difficultyParam = searchParams.get("difficulty"); // EASY | MEDIUM | HARD | null
+  const subjectFilter = subjectParam === "READING" || subjectParam === "MATH" ? subjectParam : undefined;
+  const difficultyFilter = difficultyParam ? (difficultyParam as Difficulty) : undefined;
+
+  // Try generating a brand-new question with AI first (see lib/ai/generateQuestion.ts)
+  // so the question pool is effectively endless rather than capped at the
+  // seeded/imported bank. This is a no-op (returns null immediately) unless
+  // GEMINI_API_KEY is configured, and any failure — missing key, network
+  // error, malformed output — falls straight through to the existing
+  // pick-from-bank logic below, so this can never break the game.
+  const aiQuestion = await generateAIQuestion({ subject: subjectFilter, difficulty: difficultyFilter });
+  if (aiQuestion) {
+    const created = await prisma.question.create({
+      data: { ...aiQuestion, source: "ai-generated" },
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { correct, explanation, ...safe } = created;
+    return NextResponse.json({ question: safe });
+  }
 
   const where: Prisma.QuestionWhereInput = {};
-  if (subjectParam === "READING" || subjectParam === "MATH") where.subject = subjectParam;
-  if (difficultyParam) where.difficulty = difficultyParam as Difficulty;
+  if (subjectFilter) where.subject = subjectFilter;
+  if (difficultyFilter) where.difficulty = difficultyFilter;
 
   const count = await prisma.question.count({ where });
   if (count === 0) {

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Plus, Upload, Pencil, Trash2 } from "lucide-react";
@@ -28,6 +29,7 @@ interface AdminQuestion {
   correct: string;
   explanation: string;
   tags: string | null;
+  source: string;
 }
 
 const EMPTY: Omit<AdminQuestion, "id"> = {
@@ -44,6 +46,7 @@ const EMPTY: Omit<AdminQuestion, "id"> = {
   correct: "A",
   explanation: "",
   tags: null,
+  source: "admin",
 };
 
 export default function AdminQuestionsPage() {
@@ -151,6 +154,7 @@ export default function AdminQuestionsPage() {
               <TableHead className="text-white/60">Subject</TableHead>
               <TableHead className="text-white/60">Difficulty</TableHead>
               <TableHead className="text-white/60">Prompt</TableHead>
+              <TableHead className="text-white/60">Source</TableHead>
               <TableHead className="text-white/60 text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -160,6 +164,15 @@ export default function AdminQuestionsPage() {
                 <TableCell>{q.subject}</TableCell>
                 <TableCell>{q.difficulty}</TableCell>
                 <TableCell className="max-w-md truncate">{q.prompt}</TableCell>
+                <TableCell>
+                  {q.source === "ai-generated" ? (
+                    <Badge variant="outline" className="border-scheme-accent/40 bg-scheme-accent-10 text-scheme-accent">
+                      AI
+                    </Badge>
+                  ) : (
+                    <span className="text-xs text-white/50">{q.source}</span>
+                  )}
+                </TableCell>
                 <TableCell className="text-right">
                   <Button size="icon" variant="ghost" onClick={() => { setEditing(q); setEditingId(q.id); }}>
                     <Pencil className="h-4 w-4" />
